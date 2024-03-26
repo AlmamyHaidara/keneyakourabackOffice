@@ -1,4 +1,6 @@
 <?php require_once("./components/header.php") ?>
+
+
 <!-- Page Wrapper -->
 <div id="wrapper">
   <!-- Sidebar -->
@@ -34,7 +36,8 @@
 
           <?php require_once("./components/table.php") ?>
           <!-- Pie Chart -->
-          <?php require_once("./components/pieChart.php") ?>
+          <?php //require_once("./components/pieChart.php") 
+          ?>
 
         </div>
 

@@ -1,4 +1,17 @@
-<?php require_once("./config/config.php"); ?>
+<?php require_once("./config/config.php");
+
+session_start();
+
+if (!isset($_SESSION["user"])) {
+    header('Location: ./login.php');
+    exit();
+}
+if (isset($_POST["logout"])) {
+    session_destroy();
+    header('Location: ./login.php');
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
