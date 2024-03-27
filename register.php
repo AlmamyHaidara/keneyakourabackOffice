@@ -15,15 +15,14 @@ if (isset($_POST["register"])) {
                 $req->execute([$email]);
                 $res  =  $req->fetchAll(PDO::FETCH_ASSOC);
                 if (sizeof($res) == 0) {
+                    // die($password);
+                    $hash = password_hash($password, PASSWORD_DEFAULT);
                     $req = $con->prepare("INSERT INTO user (nom,prenom, email, password) value (?,?,?,?)");
-                    $req->execute([$nom, $prenom, $email, $password]);
+                    $req->execute([$nom, $prenom, $email, $hash]);
                     $res  =  $req->fetchAll(PDO::FETCH_ASSOC);
-                    if ($res) {
-                        if (password_verify($password, password_hash($res[0]["password"], PASSWORD_DEFAULT))) {
-                            header('Location: ./login.php');
-                            exit();
-                        }
-                    }
+
+                    header('Location: ./login.php');
+                    exit();
                 } else {
                     $message = "Vous avez deja un compte";
                     header('Location: ./login.php');

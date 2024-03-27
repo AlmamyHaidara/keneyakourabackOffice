@@ -14,11 +14,15 @@ if (isset($_POST["login"])) {
             $req->execute([$email]);
             $res  =  $req->fetchAll(PDO::FETCH_ASSOC);
             if (sizeof($res) != 0) {
-
+                var_dump($password, $res[0]["password"]);
+                var_dump(password_verify($password, $res[0]["password"]));
                 if (password_verify($password, $res[0]["password"])) {
                     $_SESSION["user"] = [$res[0]['id'], $res[0]["email"], $res[0]['nom'], $res[0]["prenom"]];
                     header('Location: ./index.php');
                     exit();
+                } else {
+
+                    $message = "Email ou mots de pass est incorrect";
                 }
             } else {
                 $message = "Cet utilisateur n'existe pas";
