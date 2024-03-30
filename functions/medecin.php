@@ -3,12 +3,12 @@ require_once("../config/config.php");
 global $con;
 if (isset($_POST["editMedecin"])) {
     extract($_POST);
-    if (!empty($nom_prenom) && !empty($adresse) && !empty($structure) && !empty($email) && !empty($telephone)) {
+    if (!empty($nom_prenom) && !empty($adresse) && !empty($structure) && !empty($email) && !empty($telephone) && !empty($date) && !empty($statut) && !empty($remarque)) {
         try {
-            $stmt = $con->prepare("UPDATE medecin SET nom_prenom=?, adresse=?, structure=?, email=?, telephone=? WHERE id_med=?");
-            $res = $stmt->execute([$nom_prenom, $adresse, $structure, $email, $telephone, $id_med]);
+            $stmt = $con->prepare("UPDATE medecin SET nom_prenom=?, adresse=?, structure=?, email=?, telephone=?, date_1ere_rdv=?, statut=?, remarque=? WHERE id_med=?");
+            $res = $stmt->execute([$nom_prenom, $adresse, $structure, $email, $telephone, $date, $statut, $remarque, $id_med]);
 
-            var_dump([$nom_prenom, $adresse, $structure, $email, $telephone, $id_med]);
+            // var_dump([$nom_prenom, $adresse, $structure, $email, $telephone, $id_med]);
             if ($res) {
                 header('Location: ../index.php');
                 exit();
